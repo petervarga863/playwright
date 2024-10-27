@@ -83,6 +83,13 @@ test('create account error messages', async () => {
   await expect(tractiveTest.passwordFieldError).not.toBeVisible();
   await expect(tractiveTest.emailFieldError).not.toBeVisible();
 
-  const isDisabled = await tractiveTest.submitButton.isDisabled();
+  let isDisabled = await tractiveTest.submitButton.isDisabled();
   expect(isDisabled).toBe(true);
+  
+  await tractiveTest.lastNameField.fill("test");
+  await tractiveTest.newsletterCheckbox.click();
+
+  isDisabled = await tractiveTest.submitButton.isDisabled();
+  expect(isDisabled).toBe(false);
+
 });
